@@ -3,7 +3,7 @@
 <img
   alt="Crown"
   src="/src/assets/crown.svg"
-  style="width:70%"
+  style="width:100px"
 />
 
 ---

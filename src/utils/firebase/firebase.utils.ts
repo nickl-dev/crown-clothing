@@ -1,4 +1,8 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
 import {
   getAuth,
   signInWithRedirect,
@@ -10,8 +14,9 @@ import {
   onAuthStateChanged,
   User,
   NextOrObserver,
-  UserCredential,
+  UserCredential
 } from 'firebase/auth';
+
 import {
   getFirestore,
   doc,
@@ -21,24 +26,26 @@ import {
   writeBatch,
   query,
   getDocs,
-  QueryDocumentSnapshot,
+  QueryDocumentSnapshot
 } from 'firebase/firestore';
 
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk',
-  authDomain: 'crwn-clothing-db-98d4d.firebaseapp.com',
-  projectId: 'crwn-clothing-db-98d4d',
-  storageBucket: 'crwn-clothing-db-98d4d.appspot.com',
-  messagingSenderId: '626766232035',
-  appId: '1:626766232035:web:506621582dab103a4d08d6',
+  apiKey: 'AIzaSyAFCE_PD-QtzGx_BYnd6EPmWCzLPpCSzZM',
+  authDomain: 'crwn-clothing-db-7a309.firebaseapp.com',
+  projectId: 'crwn-clothing-db-7a309',
+  storageBucket: 'crwn-clothing-db-7a309.firebasestorage.app',
+  messagingSenderId: '166282381708',
+  appId: '1:166282381708:web:e790c732023a5490e3eea9'
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
-  prompt: 'select_account',
+  prompt: 'select_account'
 });
 
 export const auth = getAuth();
@@ -121,7 +128,7 @@ export const createUserDocumentFromAuth = async (
         displayName,
         email,
         createdAt,
-        ...additionalInformation,
+        ...additionalInformation
       });
     } catch (error) {
       console.log('error creating the user', error.message);
