@@ -1,16 +1,16 @@
-import { CART_ACTION_TYPES } from './cart.types';
-import { createAction } from '../../utils/reducer/reducer.utils';
+import { CART_ACTION_TYPES } from "./cart.types";
+import { createAction } from "../../utils/reducer/reducer.utils";
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.id === productToAdd.id
+    (cartItem) => cartItem.id === productToAdd.id,
   );
 
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
       cartItem.id === productToAdd.id
         ? { ...cartItem, quantity: cartItem.quantity + 1 }
-        : cartItem
+        : cartItem,
     );
   }
 
@@ -20,7 +20,7 @@ const addCartItem = (cartItems, productToAdd) => {
 const removeCartItem = (cartItems, cartItemToRemove) => {
   // find the cart item to remove
   const existingCartItem = cartItems.find(
-    (cartItem) => cartItem.id === cartItemToRemove.id
+    (cartItem) => cartItem.id === cartItemToRemove.id,
   );
 
   // check if quantity is equal to 1, if it is remove that item from the cart
@@ -32,7 +32,7 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   return cartItems.map((cartItem) =>
     cartItem.id === cartItemToRemove.id
       ? { ...cartItem, quantity: cartItem.quantity - 1 }
-      : cartItem
+      : cartItem,
   );
 };
 

@@ -1,11 +1,11 @@
-import { USER_ACTION_TYPES } from './user.types';
-import { createAction, Action } from '../../utils/reducer/reducer.utils';
+import { USER_ACTION_TYPES } from "./user.types";
+import { createAction, Action } from "../../utils/reducer/reducer.utils";
 
 import {
   UserData,
   AdditionalInformation,
-} from '../../utils/firebase/firebase.utils';
-import { User } from 'firebase/auth';
+} from "../../utils/firebase/firebase.utils";
+import { User } from "firebase/auth";
 
 export type CheckUserSession = Action<USER_ACTION_TYPES.CHECK_USER_SESSION>;
 
@@ -59,7 +59,7 @@ export const googleSignInStart = (): GoogleSignInStart =>
 
 export const emailSignInStart = (
   email: string,
-  password: string
+  password: string,
 ): EmailSignInStart =>
   createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, { email, password });
 
@@ -72,7 +72,7 @@ export const signInFailed = (error: Error): SignInFailed =>
 export const signUpStart = (
   email: string,
   password: string,
-  displayName: string
+  displayName: string,
 ): SignUpStart =>
   createAction(USER_ACTION_TYPES.SIGN_UP_START, {
     email,
@@ -82,7 +82,7 @@ export const signUpStart = (
 
 export const signUpSuccess = (
   user: User,
-  additionalDetails: AdditionalInformation
+  additionalDetails: AdditionalInformation,
 ): SignUpSuccess =>
   createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, { user, additionalDetails });
 

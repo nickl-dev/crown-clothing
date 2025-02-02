@@ -25,5 +25,5 @@ render(
       </PersistGate>
     </Provider>
   </React.StrictMode>,
-  rootElement
+  rootElement,
 );

@@ -1,7 +1,7 @@
-import { USER_ACTION_TYPES } from './user.types';
-import { UserAction } from './user.action';
+import { USER_ACTION_TYPES } from "./user.types";
+import { UserAction } from "./user.action";
 
-import { UserData } from '../../utils/firebase/firebase.utils';
+import { UserData } from "../../utils/firebase/firebase.utils";
 
 export type UserState = {
   readonly currentUser: UserData | null;
@@ -17,7 +17,7 @@ const INITIAL_STATE: UserState = {
 
 export const userReducer = (
   state = INITIAL_STATE,
-  action = {} as UserAction
+  action = {} as UserAction,
 ) => {
   const { type, payload } = action;
 

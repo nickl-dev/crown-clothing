@@ -5,5 +5,5 @@ export type Action<T, P = void> = {
 
 export const createAction = <T extends string, P = void>(
   type: T,
-  payload?: P
+  payload?: P,
 ): Action<T, P> => ({ type, payload });
