@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -13,8 +13,8 @@ import {
   signOut,
   onAuthStateChanged,
   NextOrObserver,
-  User,
-} from "firebase/auth";
+  User
+} from 'firebase/auth';
 
 import {
   getFirestore,
@@ -25,19 +25,19 @@ import {
   writeBatch,
   query,
   getDocs,
-  QueryDocumentSnapshot,
-} from "firebase/firestore";
+  QueryDocumentSnapshot
+} from 'firebase/firestore';
 
-import { Category } from "../../store/categories/category.types";
+import { Category } from '../../store/categories/category.types';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAFCE_PD-QtzGx_BYnd6EPmWCzLPpCSzZM",
-  authDomain: "crwn-clothing-db-7a309.firebaseapp.com",
-  projectId: "crwn-clothing-db-7a309",
-  storageBucket: "crwn-clothing-db-7a309.firebasestorage.app",
-  messagingSenderId: "166282381708",
-  appId: "1:166282381708:web:e790c732023a5490e3eea9",
+  apiKey: process.env.REACT_APP_FIREBASE_CONFIG_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_CONFIG_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_CONFIG_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_CONFIG_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_CONFIG_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_CONFIG_APP_ID
 };
 
 // Initialize Firebase
@@ -46,7 +46,7 @@ const app = initializeApp(firebaseConfig);
 const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
-  prompt: "select_account",
+  prompt: 'select_account'
 });
 
 export const auth = getAuth();
@@ -63,7 +63,7 @@ export type ObjectToAdd = {
 
 export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   collectionKey: string,
-  objectsToAdd: T[],
+  objectsToAdd: T[]
 ): Promise<void> => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
@@ -74,16 +74,16 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   });
 
   await batch.commit();
-  console.log("done");
+  console.log('done');
 };
 
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
-  const collectionRef = collection(db, "categories");
+  const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map(
-    (docSnapshot) => docSnapshot.data() as Category,
+    (docSnapshot) => docSnapshot.data() as Category
   );
 };
 
@@ -99,11 +99,11 @@ export type UserData = {
 
 export const createUserDocumentFromAuth = async (
   userAuth: User,
-  additionalInformation = {} as AdditionalInformation,
+  additionalInformation = {} as AdditionalInformation
 ): Promise<void | QueryDocumentSnapshot<UserData>> => {
   if (!userAuth) return;
 
-  const userDocRef = doc(db, "users", userAuth.uid);
+  const userDocRef = doc(db, 'users', userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
 
@@ -116,10 +116,10 @@ export const createUserDocumentFromAuth = async (
         displayName,
         email,
         createdAt,
-        ...additionalInformation,
+        ...additionalInformation
       });
     } catch (error) {
-      console.log("error creating the user", error);
+      console.log('error creating the user', error);
     }
   }
 
@@ -128,7 +128,7 @@ export const createUserDocumentFromAuth = async (
 
 export const createAuthUserWithEmailAndPassword = async (
   email: string,
-  password: string,
+  password: string
 ) => {
   if (!email || !password) return;
 
@@ -137,7 +137,7 @@ export const createAuthUserWithEmailAndPassword = async (
 
 export const signInAuthUserWithEmailAndPassword = async (
   email: string,
-  password: string,
+  password: string
 ) => {
   if (!email || !password) return;
 
@@ -157,7 +157,7 @@ export const getCurrentUser = (): Promise<User | null> => {
         unsubscribe();
         resolve(userAuth);
       },
-      reject,
+      reject
     );
   });
 };
